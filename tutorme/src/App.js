@@ -6,7 +6,7 @@ import {Container, Button, Alert, Modal, ModalHeader, ModalBody, ModalFooter } f
 
 
 
-/*Menu of the nar bar*/
+/*Menu of the nar bar with toggle sign in modal*/
 class Menu extends React.Component{
   state ={
     modalstatus: false
@@ -16,6 +16,7 @@ class Menu extends React.Component{
       modalstatus: !this.state.modalstatus
     });
   }
+
   render(){
     return(
       <container class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -36,7 +37,8 @@ class Menu extends React.Component{
             <a class="nav-link" href="#" onClick={this.toggleModal.bind(this)}>Sign In<span class="sr-only">(current)</span></a>
           </li>
         </ul>
-        <Modal isOpen={this.state.modalstatus}className={"modal-dialog-centered"} backdrop={backdrop}>
+        {/* modal implementation!!!! */}
+        <Modal isOpen={this.state.modalstatus}className={"modal-dialog-centered"} toggle={this.toggleModal.bind(this)}>
           <ModalHeader toggle={this.toggleModal.bind(this)}>Sign In</ModalHeader>
           <ModalBody>
           
