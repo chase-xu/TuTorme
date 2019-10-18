@@ -4,7 +4,22 @@ import './App.css';
 import {Container, Button, Alert, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 
-
+/*main section of the entire body*/
+class App extends React.Component {
+  render(){ 
+    return (
+     <div>
+       <header class="navbar navbar-light  navbar-expand flex-column flex-md-row bg-light">
+         <a class="navbar-brand " id="title" href="index.html">
+             <h2>TutorMe</h2>
+         </a>
+         <Menu />
+       </header>
+       <Search />
+     </div>
+   );
+  }
+ }
 
 /*Menu of the nar bar with toggle sign in modal*/
 class Menu extends React.Component{
@@ -63,24 +78,6 @@ class Menu extends React.Component{
       </container>
     );
   }
-}
-
-
-/*main section of the entire body*/
-class App extends React.Component {
- render(){ 
-   return (
-    <div>
-      <header class="navbar navbar-light  navbar-expand flex-column flex-md-row bg-light">
-        <a class="navbar-brand " id="title" href="index.html">
-            <h2>TutorMe</h2>
-        </a>
-        <Menu />
-      </header>
-      <Search />
-    </div>
-  );
- }
 }
 
 /*Search tutor section*/
