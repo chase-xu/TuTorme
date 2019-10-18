@@ -54,8 +54,8 @@ class Menu extends React.Component{
                 <button className={"btn btn-success col-4 align-self-center"}>Sign In</button>
               </div>   
               <div class="d-flex mt-2">
-                <a href="#" class="stretched-link p-2 bd-highlight">Don't have an account?</a>
-                <a href="#" class="stretched-link ml-auto p-2 bd-highlight">Forgot your password?</a>
+                <a href="#" class="link p-2 bd-highlight">Don't have an account?</a>
+                <a href="#" class="link ml-auto p-2 bd-highlight">Forgot your password?</a>
               </div>
             </form>
           </ModalBody>
