@@ -16,7 +16,6 @@ class Menu extends React.Component{
       modalstatus: !this.state.modalstatus
     });
   }
-
   render(){
     return(
       <container class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -38,16 +37,28 @@ class Menu extends React.Component{
           </li>
         </ul>
         {/* modal implementation!!!! */}
-        <Modal isOpen={this.state.modalstatus}className={"modal-dialog-centered"} toggle={this.toggleModal.bind(this)}>
-          <ModalHeader toggle={this.toggleModal.bind(this)}>Sign In</ModalHeader>
+        <Modal isOpen={this.state.modalstatus} className={"modal-dialog-centered"} toggle={this.toggleModal.bind(this)}>
+          <ModalHeader toggle={this.toggleModal.bind(this)}>Sign In To Your Account</ModalHeader>
           <ModalBody>
-          
+            <form>
+              <div className={"form-group"}>
+                <lable>Email address</lable>
+                <input type="email" class="form-control" aria-describedly="emailHelp" placeholder="Enter email"></input>
+                <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" placeholder="Password"></input>
+              </div>
+              <div class="row justify-content-center">
+                <button className={"btn btn-success col-4 align-self-center"}>Sign In</button>
+              </div>   
+              <div class="d-flex mt-2">
+                <a href="#" class="stretched-link p-2 bd-highlight">Don't have an account?</a>
+                <a href="#" class="stretched-link ml-auto p-2 bd-highlight">Forgot your password?</a>
+              </div>
+            </form>
           </ModalBody>
-          <ModalFooter>
-            <button className={"btn btn-primary"}>Sign In</button>
-            <button onClick={this.toggleModal.bind(this)} className={"btn btn-secondary"}>Cancel</button>
-            <button className={"btn btn-primary"} >Sign Up</button>
-          </ModalFooter>
         </Modal>
       </container>
     );
@@ -57,11 +68,6 @@ class Menu extends React.Component{
 
 /*main section of the entire body*/
 class App extends React.Component {
-  // constructor(){
-  //   this.state={
-  //     sign = "off"
-  //   };
-  // }
  render(){ 
    return (
     <div>
