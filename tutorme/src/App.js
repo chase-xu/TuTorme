@@ -21,10 +21,12 @@ class App extends React.Component {
             {/* Menu of the navbar */}
             <Menu />
           </header>
-          {/* Home page */}
-          <Route path="/Main" Component={Main} />
-          {/* About us page */}
-          <Route path="/AboutUs" Component={AboutUs} />
+            <Switch>
+              {/* Home page */}
+              <Route path="/" exact component={Main} />
+              {/* About us page */}
+              <Route path="/AboutUs" component={AboutUs} />
+            </Switch>
         </div>
       </Router>
    );
