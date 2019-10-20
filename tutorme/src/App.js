@@ -7,6 +7,7 @@ import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 /*Pages components import*/
 import Main from './Main';
 import Menu from './Menu';
+import AboutUs from './AboutUs';
 /*main section of the entire body*/
 class App extends React.Component {
   render(){ 
@@ -17,9 +18,12 @@ class App extends React.Component {
             <a class="navbar-brand" id="title" href="index.html">
                 <h2>TutorMe</h2>
             </a>
+            {/* Menu of the navbar */}
             <Menu />
           </header>
+          {/* Home page */}
           <Route path="/Main" Component={Main} />
+          {/* About us page */}
           <Route path="/AboutUs" Component={AboutUs} />
         </div>
       </Router>
