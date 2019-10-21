@@ -1,11 +1,19 @@
-import React from 'react';
-import logo from './TutorMeLogo.png';
+import React, {useState, useEffect} from 'react';
 import './App.css';
-import {Container, Button, Alert, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 
 
 class Tutorlist extends React.Component{
+    useEffect( () => {
+        fetchItems();
+    }, []);
+    fetchItems = async() =>{
+        const data = await fetch(
+            "https://fortnite-api.theapinetwork.com/users/id?username=Ninja"
+        );
+        const items = await data.json();
+        console.log(items);
+    }
     render(){
         return(
             <div class="m-4">
