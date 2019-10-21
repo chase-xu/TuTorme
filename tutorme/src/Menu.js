@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './TutorMeLogo.png';
 import './App.css';
 import {Container, Button, Alert, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
@@ -24,7 +23,7 @@ class Menu extends React.Component{
               <a class="nav-link" href="/AboutUs">About Us<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">FAQS<span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/FAQs">FAQS<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/BeTutor">BeTutor<span class="sr-only">(current)</span></a>

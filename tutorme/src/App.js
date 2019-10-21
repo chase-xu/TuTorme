@@ -10,6 +10,7 @@ import Menu from './Menu';
 import AboutUs from './AboutUs';
 import BeTutor from './BeTutor';
 import Tutorlist from './Tutorlist';
+import FAQs from './FAQs';
 /*main section of the entire body*/
 class App extends React.Component {
   render(){ 
@@ -32,6 +33,8 @@ class App extends React.Component {
               <Route path="/BeTutor" component={BeTutor} />
               {/*Tutor list*/}
               <Route path="/Tutorlist" component={Tutorlist} />
+              {/*FAQs*/}
+              <Route path="/FAQs" component={FAQs} />
             </Switch>
         </div>
       </Router>

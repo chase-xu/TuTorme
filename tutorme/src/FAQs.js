@@ -1,9 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
-import {  Modal, ModalHeader, ModalBody  } from 'reactstrap';
-import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
-
 import 'react-tabs/style/react-tabs.css';
 
 
