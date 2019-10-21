@@ -4,16 +4,17 @@ import './App.css';
 
 
 class Tutorlist extends React.Component{
-    useEffect( () => {
-        fetchItems();
-    }, []);
-    fetchItems = async() =>{
-        const data = await fetch(
-            "https://fortnite-api.theapinetwork.com/users/id?username=Ninja"
-        );
-        const items = await data.json();
-        console.log(items);
-    }
+//     useEffect( {
+//         fetchItems();
+//     }, []);
+
+//    const fetchItems = async() =>{
+//         const data = await fetch(
+//             "https://fortnite-api.theapinetwork.com/users/id?username=Ninja"
+//         );
+//         const items = await data.json();
+//         console.log(items);
+//     }
     render(){
         return(
             <div class="m-4">
