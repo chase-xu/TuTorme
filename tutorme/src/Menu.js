@@ -27,7 +27,7 @@ class Menu extends React.Component{
               <a class="nav-link" href="#">FAQS<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">BeTutor<span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/BeTutor">BeTutor<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" onClick={this.toggleModal.bind(this)}>Sign In<span class="sr-only">(current)</span></a>

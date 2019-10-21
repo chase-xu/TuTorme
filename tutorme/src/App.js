@@ -8,6 +8,8 @@ import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Main from './Main';
 import Menu from './Menu';
 import AboutUs from './AboutUs';
+import BeTutor from './BeTutor';
+import Tutorlist from './Tutorlist';
 /*main section of the entire body*/
 class App extends React.Component {
   render(){ 
@@ -26,6 +28,10 @@ class App extends React.Component {
               <Route path="/" exact component={Main} />
               {/* About us page */}
               <Route path="/AboutUs" component={AboutUs} />
+              {/*BeTutor Page*/}
+              <Route path="/BeTutor" component={BeTutor} />
+              {/*Tutor list*/}
+              <Route path="/Tutorlist" component={Tutorlist} />
             </Switch>
         </div>
       </Router>
