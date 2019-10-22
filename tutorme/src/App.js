@@ -18,7 +18,7 @@ class App extends React.Component {
       <Router>
         <div>
           <header class="navbar navbar-light  navbar-expand flex-column flex-md-row bg-light">
-            <a class="navbar-brand" id="title" href="index.html">
+            <a class="navbar-brand" id="title" href="/">
                 <h2>TutorMe</h2>
             </a>
             {/* Menu of the navbar */}
