@@ -23,9 +23,6 @@ class Tutorlist extends React.Component{
                 </div>
                 <div>
                     <div>
-                        <label>First Name</label>
-                        <label>Last Name</label>
-                        <label>Reviews:</label>
                     </div>
                     
                 </div>
