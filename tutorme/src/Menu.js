@@ -3,6 +3,7 @@ import './App.css';
 import {Container, Button, Alert, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 /*Menu of the nar bar with toggle sign in modal*/
+
 class Menu extends React.Component{
     state ={
       modalstatus: false
@@ -13,6 +14,13 @@ class Menu extends React.Component{
       });
     }
     render(){
+      // Firebase App (the core Firebase SDK) is always required and
+      // must be listed before other Firebase SDKs
+      var firebase = require("firebase/app");
+
+      // Add the Firebase products that you want to use
+      require("firebase/auth");
+      require("firebase/firestore");
       return(
         <container class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
