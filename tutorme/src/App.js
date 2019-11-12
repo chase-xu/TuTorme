@@ -1,9 +1,10 @@
 import React from 'react';
 import logo from './TutorMeLogo.png';
+import {applyMiddleware} from 'redux';
 import './App.css';
 import {Container, Button, Alert, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
+import ReduxThunk from 'redux-thunk';
 /*Pages components import*/
 import Main from './Main';
 import Menu from './Menu';
