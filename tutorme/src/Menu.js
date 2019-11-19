@@ -2,7 +2,8 @@ import React from 'react';
 import './App.css';
 import {Container, Button, Alert, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-/*Menu of the nar bar with toggle sign in modal*/
+
+
 
 class Menu extends React.Component{
     state ={
@@ -14,13 +15,6 @@ class Menu extends React.Component{
       });
     }
     render(){
-      // Firebase App (the core Firebase SDK) is always required and
-      // must be listed before other Firebase SDKs
-      var firebase = require("firebase/app");
-
-      // Add the Firebase products that you want to use
-      require("firebase/auth");
-      require("firebase/firestore");
       return(
         <container class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
@@ -41,7 +35,7 @@ class Menu extends React.Component{
             </li>
           </ul>
           {/* modal implementation!!!! */}
-          <Modal isOpen={this.state.modalstatus} className={"modal-dialog-centered"} toggle={this.toggleModal.bind(this)}>
+          {/* <Modal isOpen={this.state.modalstatus} className={"modal-dialog-centered"} toggle={this.toggleModal.bind(this)}>
             <ModalHeader toggle={this.toggleModal.bind(this)}>Sign In To Your Account</ModalHeader>
             <ModalBody>
               <form>
@@ -63,7 +57,7 @@ class Menu extends React.Component{
                 </div>
               </form>
             </ModalBody>
-          </Modal>
+          </Modal> */}
         </container>
       );
     }

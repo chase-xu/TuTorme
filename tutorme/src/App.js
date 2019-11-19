@@ -12,6 +12,61 @@ import AboutUs from './AboutUs';
 import BeTutor from './BeTutor';
 import Tutorlist from './Tutorlist';
 import FAQs from './FAQs';
+
+
+
+
+// Firebase App (the core Firebase SDK) is always required and
+// must be listed before other Firebase SDKs
+var firebase = require("firebase/app");
+
+// Add the Firebase products that you want to use
+require("firebase/auth");
+require("firebase/firestore");
+
+// TODO: Replace the following with your app's Firebase project configuration
+var firebaseConfig = {
+  apiKey: "api-key",
+  authDomain: "project-id.firebaseapp.com",
+  databaseURL: "https://project-id.firebaseio.com",
+  projectId: "project-id",
+  storageBucket: "project-id.appspot.com",
+  messagingSenderId: "sender-id",
+  appId: "app-id",
+  measurementId: "G-measurement-id",
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+var firebase = require('firebase');
+var firebaseui = require('firebaseui');
+// Initialize the FirebaseUI Widget using Firebase.
+var ui = new firebaseui.auth.AuthUI(firebase.auth());
+ui.start('#firebaseui-auth-container', {
+  signInOptions: [
+    {
+      provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      signInMethod: firebase.auth.EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD,
+      requireDisplayName: false
+    }
+  ]
+});
+
+// // Is there an email link sign-in?
+// if (ui.isPendingRedirect()) {
+//   ui.start('#firebaseui-auth-container', uiConfig);
+// }
+// // This can also be done via:
+// if ((firebase.auth().isSignInWithEmailLink(window.location.href))){
+//   ui.start('#firebaseui-auth-container', uiConfig);
+// }
+
+
+
+
+
+
 /*main section of the entire body*/
 class App extends React.Component {
   render(){ 
@@ -44,3 +99,4 @@ class App extends React.Component {
 }
 
 export default App;
+export {firebase};
