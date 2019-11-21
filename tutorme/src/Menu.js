@@ -35,7 +35,7 @@ class Menu extends React.Component{
             </li>
           </ul>
           {/* modal implementation!!!! */}
-          {/* <Modal isOpen={this.state.modalstatus} className={"modal-dialog-centered"} toggle={this.toggleModal.bind(this)}>
+          <Modal isOpen={this.state.modalstatus} className={"modal-dialog-centered"} toggle={this.toggleModal.bind(this)}>
             <ModalHeader toggle={this.toggleModal.bind(this)}>Sign In To Your Account</ModalHeader>
             <ModalBody>
               <form>
@@ -57,7 +57,7 @@ class Menu extends React.Component{
                 </div>
               </form>
             </ModalBody>
-          </Modal> */}
+          </Modal>
         </container>
       );
     }
