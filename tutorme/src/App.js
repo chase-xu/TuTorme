@@ -12,7 +12,7 @@ import AboutUs from './AboutUs';
 import BeTutor from './BeTutor';
 import Tutorlist from './Tutorlist';
 import FAQs from './FAQs';
-import signup from "./signup";
+import Signup from "./Signup";
 
 
 
@@ -92,7 +92,7 @@ class App extends React.Component {
               {/*FAQs*/}
               <Route path="/FAQs" component={FAQs} />
               {/*sign up*/}
-              <Route path="/signup" component={signup}/>
+              <Route path="/Signup" exact component={Signup}/>
             </Switch>
         </div>
       </Router>

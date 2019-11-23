@@ -1,8 +1,37 @@
 import React from 'react';
 import './App.css';
 import {Container, Button, Alert, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import {firebase} from './App.js';
+import ReactDOM from 'react-dom';
+import { GoogleLoginButton } from "react-social-login-buttons";
 
 
+
+
+
+function log () {
+  var provider = new firebase.auth.GoogleAuthProvider();
+  provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+  firebase.auth().languageCode = 'pt';
+  // To apply the default browser preference instead of explicitly setting it.
+  // firebase.auth().useDeviceLanguage();
+  firebase.auth().signInWithPopup(provider).then(function(result) {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = result.credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    // ...
+  }).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
+  });
+}
 
 
 class Menu extends React.Component{
@@ -34,7 +63,7 @@ class Menu extends React.Component{
               <a class="nav-link" href="#" onClick={this.toggleModal.bind(this)}>Sign In<span class="sr-only">(current)</span></a>
             </li>
             <li class ="nav-item">
-              <a class="nav-link" href="/signup">Sign Up<span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/Signup">Sign Up<span class="sr-only">(current)</span></a>
             </li>
           </ul>
           {/* modal implementation!!!! */}
@@ -42,6 +71,7 @@ class Menu extends React.Component{
             <ModalHeader toggle={this.toggleModal.bind(this)}>Sign In To Your Account</ModalHeader>
             <ModalBody>
               <form>
+                <GoogleLoginButton onClick={() =>function(){}, log()} />
                 <div className={"form-group"}>
                   <lable>Email address</lable>
                   <input type="email" class="form-control" aria-describedly="emailHelp" placeholder="Enter email"></input>
@@ -66,4 +96,12 @@ class Menu extends React.Component{
     }
   }
 
+  class Googlesignin {
+  render(){
+      return(
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+      );
+
+    }
+  }
   export default Menu;
