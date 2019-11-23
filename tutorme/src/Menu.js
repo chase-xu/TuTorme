@@ -33,6 +33,9 @@ class Menu extends React.Component{
             <li class="nav-item">
               <a class="nav-link" href="#" onClick={this.toggleModal.bind(this)}>Sign In<span class="sr-only">(current)</span></a>
             </li>
+            <li class ="nav-item">
+              <a class="nav-link" href="/signup">Sign Up<span class="sr-only">(current)</span></a>
+            </li>
           </ul>
           {/* modal implementation!!!! */}
           <Modal isOpen={this.state.modalstatus} className={"modal-dialog-centered"} toggle={this.toggleModal.bind(this)}>

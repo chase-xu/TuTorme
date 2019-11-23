@@ -12,7 +12,7 @@ import AboutUs from './AboutUs';
 import BeTutor from './BeTutor';
 import Tutorlist from './Tutorlist';
 import FAQs from './FAQs';
-
+import signup from "./signup";
 
 
 
@@ -91,6 +91,8 @@ class App extends React.Component {
               <Route path="/Tutorlist" component={Tutorlist} />
               {/*FAQs*/}
               <Route path="/FAQs" component={FAQs} />
+              {/*sign up*/}
+              <Route path="/signup" component={signup}/>
             </Switch>
         </div>
       </Router>
