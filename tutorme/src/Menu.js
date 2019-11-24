@@ -1,40 +1,57 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './App.css';
 import {Container, Button, Alert, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import {firebase} from './App.js';
-import ReactDOM from 'react-dom';
-import { GoogleLoginButton } from "react-social-login-buttons";
+import {GoogleLogin} from "react-google-login";
+import {PostData} from "./services/PostData";
 
 
 
 
+// function log () {
+//   var provider = new firebase.auth.GoogleAuthProvider();
+//   provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+//   firebase.auth().languageCode = 'pt';
+//   // To apply the default browser preference instead of explicitly setting it.
+//   // firebase.auth().useDeviceLanguage();
+//   firebase.auth().signInWithPopup(provider).then(function(result) {
+//     // This gives you a Google Access Token. You can use it to access the Google API.
+//     var token = result.credential.accessToken;
+//     // The signed-in user info.
+//     var user = result.user;
+//     // ...
+//   }).catch(function(error) {
+//     // Handle Errors here.
+//     var errorCode = error.code;
+//     var errorMessage = error.message;
+//     // The email of the user's account used.
+//     var email = error.email;
+//     // The firebase.auth.AuthCredential type that was used.
+//     var credential = error.credential;
+//     // ...
+//   });
+// }
 
-function log () {
-  var provider = new firebase.auth.GoogleAuthProvider();
-  provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-  firebase.auth().languageCode = 'pt';
-  // To apply the default browser preference instead of explicitly setting it.
-  // firebase.auth().useDeviceLanguage();
-  firebase.auth().signInWithPopup(provider).then(function(result) {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    var token = result.credential.accessToken;
-    // The signed-in user info.
-    var user = result.user;
-    // ...
-  }).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
-    // ...
-  });
-}
 
-
-class Menu extends React.Component{
+class Menu extends Component{
+  constructor(props){
+    super(props);
+    this.stats ={
+      redirect: false
+    }
+    this.signup = this.signup.bind(this);
+  }
+    signup(res, type){
+      if(this.state.username && this.state.password){
+        PostData('login',this.state).then((result) => {
+        let responseJson = result;
+        if(responseJson.userData){
+        sessionStorage.setItem('userData',JSON.stringify(responseJson));
+        this.setState({redirectToReferrer: true});
+        }
+        });
+        }
+    }
     state ={
       modalstatus: false
     }
@@ -44,6 +61,10 @@ class Menu extends React.Component{
       });
     }
     render(){
+      const responseGoogle = (response) =>{
+        console.log(response);
+        this.signup(response, 'google');
+      }
       return(
         <container class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
@@ -70,8 +91,14 @@ class Menu extends React.Component{
           <Modal isOpen={this.state.modalstatus} className={"modal-dialog-centered"} toggle={this.toggleModal.bind(this)}>
             <ModalHeader toggle={this.toggleModal.bind(this)}>Sign In To Your Account</ModalHeader>
             <ModalBody>
+              <GoogleLogin
+              clientId="868983935360-nea6nb8fsc8av1624umq3fepj0ffgihu.apps.googleusercontent.com"
+              buttonText="Login"
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}
+              />
               <form>
-                <GoogleLoginButton onClick={() =>function(){}, log()} />
+                {/* <GoogleLoginButton onClick={() =>function(){}, log()} /> */}
                 <div className={"form-group"}>
                   <lable>Email address</lable>
                   <input type="email" class="form-control" aria-describedly="emailHelp" placeholder="Enter email"></input>
@@ -96,12 +123,12 @@ class Menu extends React.Component{
     }
   }
 
-  class Googlesignin {
-  render(){
-      return(
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
-      );
+  // class Googlesignin {
+  // render(){
+  //     return(
+  //       <div class="g-signin2" data-onsuccess="onSignIn"></div>
+  //     );
 
-    }
-  }
+  //   }
+  // }
   export default Menu;
