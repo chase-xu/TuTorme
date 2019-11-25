@@ -4,46 +4,46 @@ import {Container, Button, Alert, Modal, ModalHeader, ModalBody, ModalFooter } f
 import {firebase} from './App.js';
 import {GoogleLogin} from "react-google-login";
 import {PostData} from "./services/PostData";
+import {Redirect} from 'react-router-dom';
 
 
 
 
-// function log () {
-//   var provider = new firebase.auth.GoogleAuthProvider();
-//   provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-//   firebase.auth().languageCode = 'pt';
-//   // To apply the default browser preference instead of explicitly setting it.
-//   // firebase.auth().useDeviceLanguage();
-//   firebase.auth().signInWithPopup(provider).then(function(result) {
-//     // This gives you a Google Access Token. You can use it to access the Google API.
-//     var token = result.credential.accessToken;
-//     // The signed-in user info.
-//     var user = result.user;
-//     // ...
-//   }).catch(function(error) {
-//     // Handle Errors here.
-//     var errorCode = error.code;
-//     var errorMessage = error.message;
-//     // The email of the user's account used.
-//     var email = error.email;
-//     // The firebase.auth.AuthCredential type that was used.
-//     var credential = error.credential;
-//     // ...
-//   });
-// }
 
 
 class Menu extends Component{
   constructor(props){
     super(props);
     this.stats ={
-      redirect: false
+      redirectToReferrer: false
     }
+
+    // this.signin = this.signin.bind(this);
     this.signup = this.signup.bind(this);
   }
+  
+  signin(){
+    var userEmail = document.getElementById("email").value;
+    var userPassword = document.getElementById("password").value;
+    // window.alert(userEmail +' ' + userPassword);
+
+    firebase.auth().signInWithEmailAndPassword(userEmail, userPassword).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      window.alert("Error " + errorMessage);
+      // ...
+    });
+  }
+
+
     signup(res, type){
+      let PostData;
+      if(type === 'google' && res.w3.U3){
+
+      }
       if(this.state.username && this.state.password){
-        PostData('login',this.state).then((result) => {
+        PostData('signup',this.state).then((result) => {
         let responseJson = result;
         if(responseJson.userData){
         sessionStorage.setItem('userData',JSON.stringify(responseJson));
@@ -60,11 +60,23 @@ class Menu extends Component{
         modalstatus: !this.state.modalstatus
       });
     }
+
+
     render(){
       const responseGoogle = (response) =>{
         console.log(response);
         this.signup(response, 'google');
       }
+
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          window.alert("worked");
+        } else {
+          // No user is signed in.
+        }
+      });
+
       return(
         <container class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
@@ -101,15 +113,15 @@ class Menu extends Component{
                 {/* <GoogleLoginButton onClick={() =>function(){}, log()} /> */}
                 <div className={"form-group"}>
                   <lable>Email address</lable>
-                  <input type="email" class="form-control" aria-describedly="emailHelp" placeholder="Enter email"></input>
+                  <input type="email" class="form-control" aria-describedly="emailHelp" placeholder="Enter email" id="email"></input>
                   <small class="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Password</label>
-                  <input type="password" class="form-control" placeholder="Password"></input>
+                  <input type="password" class="form-control" placeholder="Password" id="password"></input>
                 </div>
                 <div class="row justify-content-center">
-                  <button className={"btn btn-success col-4 align-self-center"}>Sign In</button>
+                  <button className={"btn btn-success col-4 align-self-center"} onClick={this.signin.bind(this)}>Sign In</button>
                 </div>   
                 <div class="d-flex mt-2">
                   <a href="#" class="link p-2 bd-highlight">Don't have an account?</a>
@@ -123,12 +135,4 @@ class Menu extends Component{
     }
   }
 
-  // class Googlesignin {
-  // render(){
-  //     return(
-  //       <div class="g-signin2" data-onsuccess="onSignIn"></div>
-  //     );
-
-  //   }
-  // }
   export default Menu;

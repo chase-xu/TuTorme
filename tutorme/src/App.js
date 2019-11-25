@@ -16,6 +16,9 @@ import Signup from "./Signup";
 
 
 
+
+
+
 // Firebase App (the core Firebase SDK) is always required and
 // must be listed before other Firebase SDKs
 var firebase = require("firebase/app");
@@ -24,34 +27,51 @@ var firebase = require("firebase/app");
 require("firebase/auth");
 require("firebase/firestore");
 
-// TODO: Replace the following with your app's Firebase project configuration
-var firebaseConfig = {
-  apiKey: "api-key",
-  authDomain: "project-id.firebaseapp.com",
-  databaseURL: "https://tutorme-5b529.firebaseio.com/",
-  projectId: "project-id",
-  storageBucket: "project-id.appspot.com",
-  messagingSenderId: "sender-id",
-  appId: "app-id",
-  measurementId: "G-measurement-id",
-};
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyA-IMqgMCzH-13HIzHFZtZtHQH_VNt68V0",
+    authDomain: "tutorme-5b529.firebaseapp.com",
+    databaseURL: "https://tutorme-5b529.firebaseio.com",
+    projectId: "tutorme-5b529",
+    storageBucket: "tutorme-5b529.appspot.com",
+    messagingSenderId: "868983935360",
+    appId: "1:868983935360:web:2e389cac6bb76b347b3165",
+    measurementId: "G-NTL9GBD7HB"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
 
-var firebase = require('firebase');
-var firebaseui = require('firebaseui');
-// Initialize the FirebaseUI Widget using Firebase.
-var ui = new firebaseui.auth.AuthUI(firebase.auth());
-ui.start('#firebaseui-auth-container', {
-  signInOptions: [
-    {
-      provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-      signInMethod: firebase.auth.EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD,
-      requireDisplayName: false
-    }
-  ]
-});
+
+
+// // TODO: Replace the following with your app's Firebase project configuration
+// var firebaseConfig = {
+//   apiKey: "api-key",
+//   authDomain: "tutorme-5b529.firebaseapp.com",
+//   databaseURL: "https://tutorme-5b529.firebaseio.com/",
+//   projectId: "tutorme-5b529",
+//   storageBucket: "tutorme-5b529.appspot.com",
+//   messagingSenderId: "sender-id",
+//   appId: "1:868983935360:web:2e389cac6bb76b347b3165",
+//   measurementId: "G-measurement-id",
+// };
+
+// // Initialize Firebase
+// firebase.initializeApp(firebaseConfig);
+
+// var firebase = require('firebase');
+// var firebaseui = require('firebaseui');
+// // Initialize the FirebaseUI Widget using Firebase.
+// var ui = new firebaseui.auth.AuthUI(firebase.auth());
+// ui.start('#firebaseui-auth-container', {
+//   signInOptions: [
+//     {
+//       provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+//       signInMethod: firebase.auth.EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD,
+//       requireDisplayName: false
+//     }
+//   ]
+// });
 
 // // Is there an email link sign-in?
 // if (ui.isPendingRedirect()) {
