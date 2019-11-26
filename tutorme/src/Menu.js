@@ -5,6 +5,7 @@ import {firebase} from './App.js';
 import {GoogleLogin} from "react-google-login";
 import {PostData} from "./services/PostData";
 import {Redirect} from 'react-router-dom';
+import { get } from 'http';
 
 
 
@@ -14,13 +15,16 @@ import {Redirect} from 'react-router-dom';
 class Menu extends Component{
   constructor(props){
     super(props);
-    this.stats ={
-      redirectToReferrer: false
-    }
-
     // this.signin = this.signin.bind(this);
+    var state ={
+      redirectToReferrer: false,
+      sign: false,
+      modalstatus: false,
+    }
     this.signup = this.signup.bind(this);
+    this.isSignedin = this.isSignedin.bind(this);
   }
+
   
   signin(){
     var userEmail = document.getElementById("email").value;
@@ -33,6 +37,19 @@ class Menu extends Component{
       var errorMessage = error.message;
       window.alert("Error " + errorMessage);
       // ...
+    });
+    this.isSignedin();
+  }
+
+  isSignedin(){
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        state.sign = true;
+        window.alert("worked");
+      } else {
+        // No user is signed in.
+      }
     });
   }
 
@@ -52,9 +69,7 @@ class Menu extends Component{
         });
         }
     }
-    state ={
-      modalstatus: false
-    }
+
     toggleModal(){
       this.setState({
         modalstatus: !this.state.modalstatus
@@ -67,15 +82,17 @@ class Menu extends Component{
         console.log(response);
         this.signup(response, 'google');
       }
-
-      firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-          // User is signed in.
-          window.alert("worked");
-        } else {
-          // No user is signed in.
+      function signstates(){
+        if(this.sign == false){
+          var signin = document.getElementById("signIn").style.visibility = "hidden";
+          var singout = document.getElementById("signOut").style.visibility = "visible";
         }
-      });
+        else{
+          var signin = document.getElementById("signIn").style.visibility = "visible";
+          var singout = document.getElementById("signOut").style.visibility = "hidden";
+        }
+      }
+
 
       return(
         <container class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -92,8 +109,11 @@ class Menu extends Component{
             <li class="nav-item">
               <a class="nav-link" href="/BeTutor">BeTutor<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" id="signIn">
               <a class="nav-link" href="#" onClick={this.toggleModal.bind(this)}>Sign In<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item" id="signOut" >
+              <a class="nav-link" href="#" onClick={this.isSignedin.bind(this)}>Sign Out<span class="sr-only">(current)</span></a>
             </li>
             <li class ="nav-item">
               <a class="nav-link" href="/Signup">Sign Up<span class="sr-only">(current)</span></a>
