@@ -16,13 +16,13 @@ class Menu extends Component{
   constructor(props){
     super(props);
     // this.signin = this.signin.bind(this);
-    var state ={
-      redirectToReferrer: false,
-      sign: false,
-      modalstatus: false,
-    }
     this.signup = this.signup.bind(this);
     this.isSignedin = this.isSignedin.bind(this);
+  }
+  state ={
+    redirectToReferrer: false,
+    sign: false,
+    modalstatus: false,
   }
 
   
@@ -45,10 +45,11 @@ class Menu extends Component{
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        state.sign = true;
+        return true;
         window.alert("worked");
       } else {
         // No user is signed in.
+        return false;
       }
     });
   }
