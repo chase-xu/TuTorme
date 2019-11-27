@@ -46,10 +46,11 @@ require("firebase/firestore");
 class App extends React.Component {
   constructor(props){
     super();
-    this.state = {
-      isLoggedIn : false,
-    }
+
     this.loginState = this.loginState.bind(this);
+  }
+  state = {
+    isLoggedIn : false,
   }
   loginState(value){
     this.setState({
