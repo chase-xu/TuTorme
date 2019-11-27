@@ -46,12 +46,12 @@ require("firebase/firestore");
 class App extends React.Component {
   constructor(props){
     super();
-
     this.loginState = this.loginState.bind(this);
   }
   state = {
     isLoggedIn : false,
   }
+
   loginState(value){
     this.setState({
       isLoggedIn: value,
@@ -67,7 +67,7 @@ class App extends React.Component {
                 <h2>TutorMe</h2>
             </a>
             {/* Menu of the navbar */}
-            <Menu value={this.state.isLoggedIn} mutateState={this.loginState} />
+            <Menu App = {App} loginState={this.loginState} />
           </header>
             <Switch>
               {/* Home page */}

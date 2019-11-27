@@ -8,7 +8,6 @@ import {GoogleLogin} from "react-google-login";
 
 
 
-var signInState;
 
 class Menu extends Component{
   constructor(props){
@@ -19,12 +18,12 @@ class Menu extends Component{
     this.signed = this.signed.bind(this);
     this.handleSign = this.handleSign.bind(this);
     this.createSign = this.createSign.bind(this);
-    signInState = this.props.value;
+
   }
 
   state ={
     redirectToReferrer: false,
-    sign: signInState,
+    signInState : this.props.App.isLoggedIn,
     modalstatus: false,
   }
 
@@ -41,6 +40,7 @@ class Menu extends Component{
       window.alert("Error " + errorMessage);
       // ...
     });
+
     this.signed();
   }
     // signup(res, type){
@@ -60,31 +60,30 @@ class Menu extends Component{
     // }
 
     toggleModal(){
-      if(signInState == false){
+      window.alert("state is " + this.props.App.isLoggedIn);
+      window.alert("state is " + this.state.signInState);
+      if(this.signInState == false){
         this.setState({
           modalstatus: !this.state.modalstatus
         });
       }
       else{
-        this.props.mutateState(false);
-        this.setState({
-          sign: false,
-        });
+       this.props.loginState(false);
       }
     }
 
     createSign(){
-      if(signInState == false){
+      if(this.signInState == false){
         return(
-          <li class="nav-item" id="signIn">
-            <a className={"nav-link"} href="#" onClick={this.toggleModal.bind(this)}>{this.props.value ? 'Sign Out':'Sign In'}<span class="sr-only">(current)</span></a>
+          <li className={"nav-item"} id="signIn">
+            <a className={"nav-link"} href="#" onClick={this.toggleModal.bind(this)}>{this.props.App.isLoggedIn ? 'Sign Out':'Sign In'}<span class="sr-only">(current)</span></a>
           </li>
         );
       }
       else{
         return(
           <li class="nav-item" id="signIn">
-            <a className={"nav-link"} href="#" onClick={this.toggleModal.bind(this)}>{this.props.value ? 'Sign Out':'Sign In'}<span class="sr-only">(current)</span></a>
+            <a className={"nav-link"} href="#" onClick={this.toggleModal.bind(this)}>{this.props.App.isLoggedIn ? 'Sign Out':'Sign In'}<span class="sr-only">(current)</span></a>
           </li>
         );
       }
@@ -152,28 +151,29 @@ class Menu extends Component{
     }
 
     signed(){
+     var signn = this.signInState; 
       firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
           // User is signed in.
-        signInState = true;
+        signn = true;
         window.alert("worked");
         } else {
           // No user is signed in.
-          signInState = false;
+          signn = false;
         }
       });
-
-      window.alert("firebase signed " + signInState);
-      this.handleSign(signInState);
+      this.signInState = signn;
+      window.alert("firebase signed " + this.signInState);
+      this.handleSign(this.signInState);
     }
     // handle signed in state
     handleSign(value){
-        this.props.mutateState(value);
+        this.props.loginState(value);
         this.setState({
           sign: value
         });
         this.toggleModal();
-        window.alert('handle sign ' + this.props.value);
+        window.alert('handle sign ' + this.props.App.isLoggedIn);
     }
 
   }
