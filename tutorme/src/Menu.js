@@ -18,10 +18,12 @@ class Menu extends Component{
     this.signin = this.signin.bind(this);
     this.signed = this.signed.bind(this);
     this.handleSign = this.handleSign.bind(this);
+    signInState = this.props.value;
   }
+
   state ={
     redirectToReferrer: false,
-    sign: this.props.value,
+    sign: signInState,
     modalstatus: false,
   }
 
@@ -38,7 +40,7 @@ class Menu extends Component{
       window.alert("Error " + errorMessage);
       // ...
     });
-    setTimeout(this.signed(), 600);
+    this.signed();
   }
     // signup(res, type){
     //   let PostData;
@@ -56,38 +58,36 @@ class Menu extends Component{
     //     }
     // }
 
-
-    signed(){
-      firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-          // User is signed in.
-        signInState = true;
-        window.alert("worked");
-        } else {
-          // No user is signed in.
-          signInState = false;
-        }
-      });
-
-      window.alert("firebase signed " + signInState);
-      setTimeout(this.handleSign(signInState), 10000);
-    }
-    // handle signed in state
-    handleSign(value){
-        this.props.mutateState(value);
-        this.setState({
-          sign: value
-        });
-        this.toggleModal();
-        window.alert('handle sign ' + this.props.value);
-    }
-
     toggleModal(){
-      this.setState({
-        modalstatus: !this.state.modalstatus
-      });
+      if(signInState == false){
+        this.setState({
+          modalstatus: !this.state.modalstatus
+        });
+      }
+      else{
+        this.props.mutateState(false);
+        this.setState({
+          sign: false,
+        });
+      }
     }
 
+    createSign(){
+      if(signInState == false){
+        return(
+          <li class="nav-item" id="signIn">
+            <a className={"nav-link"} href="#" onClick={this.toggleModal.bind(this)}>{this.props.value ? 'Sign Out':'Sign In'}<span class="sr-only">(current)</span></a>
+          </li>
+        );
+      }
+      else{
+        return(
+          <li class="nav-item" id="signIn">
+            <a className={"nav-link"} href="#" onClick={this.toggleModal.bind(this)}>{this.props.value ? 'Sign Out':'Sign In'}<span class="sr-only">(current)</span></a>
+          </li>
+        );
+      }
+    }
     render(){
       // const isLoggedIn = isLoggedIn;
       const responseGoogle = (response) =>{
@@ -110,9 +110,7 @@ class Menu extends Component{
             <li class="nav-item">
               <a class="nav-link" href="/BeTutor">BeTutor<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item" id="signIn">
-              <a class="nav-link" href="#" onClick={this.toggleModal.bind(this)}>{this.props.value ? 'Sign Out':'Sign In'}<span class="sr-only">(current)</span></a>
-            </li>
+            {this.createSign()}
             <li class ="nav-item">
               <a class="nav-link" href="/Signup" hidden>Sign Up<span class="sr-only">(current)</span></a>
             </li>
@@ -134,11 +132,11 @@ class Menu extends Component{
                   <input type="email" class="form-control" aria-describedly="emailHelp" placeholder="Enter email" id="email"></input>
                   <small class="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
-                <div class="form-group">
+                <div className={"form-group"}>
                   <label for="exampleInputPassword1">Password</label>
                   <input type="password" class="form-control" placeholder="Password" id="password"></input>
                 </div>
-                <div class="row justify-content-center">
+                <div className={"row justify-content-center"}>
                   <button className={"btn btn-success col-4 align-self-center"} onClick={this.signin}>Sign In</button>
                 </div>   
                 <div class="d-flex mt-2">
@@ -151,6 +149,32 @@ class Menu extends Component{
         </container>
       );
     }
+
+    signed(){
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+        signInState = true;
+        window.alert("worked");
+        } else {
+          // No user is signed in.
+          signInState = false;
+        }
+      });
+
+      window.alert("firebase signed " + signInState);
+      this.handleSign(signInState);
+    }
+    // handle signed in state
+    handleSign(value){
+        this.props.mutateState(value);
+        this.setState({
+          sign: value
+        });
+        this.toggleModal();
+        window.alert('handle sign ' + this.props.value);
+    }
+
   }
 
   export default Menu;
