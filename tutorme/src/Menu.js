@@ -1,27 +1,27 @@
 import React, {Component} from 'react';
 import './App.css';
 import {Container, Button, Alert, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import {firebase} from './App.js';
+import {firebase, } from './App.js';
 import {GoogleLogin} from "react-google-login";
-import {PostData} from "./services/PostData";
-import {Redirect} from 'react-router-dom';
-import { get } from 'http';
 
 
 
 
 
+var signInState;
 
 class Menu extends Component{
   constructor(props){
     super(props);
     // this.signin = this.signin.bind(this);
-    this.signup = this.signup.bind(this);
-    this.isSignedin = this.isSignedin.bind(this);
+    // this.signup = this.signup.bind(this);
+    this.signin = this.signin.bind(this);
+    this.signed = this.signed.bind(this);
+    this.handleSign = this.handleSign.bind(this);
   }
   state ={
     redirectToReferrer: false,
-    sign: false,
+    sign: this.props.value,
     modalstatus: false,
   }
 
@@ -38,37 +38,48 @@ class Menu extends Component{
       window.alert("Error " + errorMessage);
       // ...
     });
-    this.isSignedin();
+    setTimeout(this.signed(), 600);
   }
+    // signup(res, type){
+    //   let PostData;
+    //   if(type === 'google' && res.w3.U3){
 
-  isSignedin(){
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        return true;
+    //   }
+    //   if(this.state.username && this.state.password){
+    //     PostData('signup',this.state).then((result) => {
+    //     let responseJson = result;
+    //     if(responseJson.userData){
+    //     sessionStorage.setItem('userData',JSON.stringify(responseJson));
+    //     this.setState({redirectToReferrer: true});
+    //     }
+    //     });
+    //     }
+    // }
+
+
+    signed(){
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+        signInState = true;
         window.alert("worked");
-      } else {
-        // No user is signed in.
-        return false;
-      }
-    });
-  }
-
-
-    signup(res, type){
-      let PostData;
-      if(type === 'google' && res.w3.U3){
-
-      }
-      if(this.state.username && this.state.password){
-        PostData('signup',this.state).then((result) => {
-        let responseJson = result;
-        if(responseJson.userData){
-        sessionStorage.setItem('userData',JSON.stringify(responseJson));
-        this.setState({redirectToReferrer: true});
+        } else {
+          // No user is signed in.
+          signInState = false;
         }
+      });
+
+      window.alert("firebase signed " + signInState);
+      setTimeout(this.handleSign(signInState), 10000);
+    }
+    // handle signed in state
+    handleSign(value){
+        this.props.mutateState(value);
+        this.setState({
+          sign: value
         });
-        }
+        this.toggleModal();
+        window.alert('handle sign ' + this.props.value);
     }
 
     toggleModal(){
@@ -77,24 +88,13 @@ class Menu extends Component{
       });
     }
 
-
     render(){
+      // const isLoggedIn = isLoggedIn;
       const responseGoogle = (response) =>{
         console.log(response);
         this.signup(response, 'google');
       }
-      function signstates(){
-        if(this.sign == false){
-          var signin = document.getElementById("signIn").style.visibility = "hidden";
-          var singout = document.getElementById("signOut").style.visibility = "visible";
-        }
-        else{
-          var signin = document.getElementById("signIn").style.visibility = "visible";
-          var singout = document.getElementById("signOut").style.visibility = "hidden";
-        }
-      }
-
-
+      
       return(
         <container class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
@@ -111,13 +111,10 @@ class Menu extends Component{
               <a class="nav-link" href="/BeTutor">BeTutor<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item" id="signIn">
-              <a class="nav-link" href="#" onClick={this.toggleModal.bind(this)}>Sign In<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item" id="signOut" >
-              <a class="nav-link" href="#" onClick={this.isSignedin.bind(this)}>Sign Out<span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="#" onClick={this.toggleModal.bind(this)}>{this.props.value ? 'Sign Out':'Sign In'}<span class="sr-only">(current)</span></a>
             </li>
             <li class ="nav-item">
-              <a class="nav-link" href="/Signup">Sign Up<span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/Signup" hidden>Sign Up<span class="sr-only">(current)</span></a>
             </li>
           </ul>
           {/* modal implementation!!!! */}
@@ -142,7 +139,7 @@ class Menu extends Component{
                   <input type="password" class="form-control" placeholder="Password" id="password"></input>
                 </div>
                 <div class="row justify-content-center">
-                  <button className={"btn btn-success col-4 align-self-center"} onClick={this.signin.bind(this)}>Sign In</button>
+                  <button className={"btn btn-success col-4 align-self-center"} onClick={this.signin}>Sign In</button>
                 </div>   
                 <div class="d-flex mt-2">
                   <a href="#" class="link p-2 bd-highlight">Don't have an account?</a>
