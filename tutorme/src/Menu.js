@@ -18,6 +18,7 @@ class Menu extends Component{
     this.signin = this.signin.bind(this);
     this.signed = this.signed.bind(this);
     this.handleSign = this.handleSign.bind(this);
+    this.createSign = this.createSign.bind(this);
     signInState = this.props.value;
   }
 
