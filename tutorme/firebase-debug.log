@@ -1,0 +1,25 @@
+[debug] [2019-12-02T02:43:28.888Z] ----------------------------------------------------------------------
+[debug] [2019-12-02T02:43:28.891Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\chase\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2019-12-02T02:43:28.891Z] CLI Version:   7.8.1
+[debug] [2019-12-02T02:43:28.891Z] Platform:      win32
+[debug] [2019-12-02T02:43:28.891Z] Node Version:  v10.16.3
+[debug] [2019-12-02T02:43:28.892Z] Time:          Sun Dec 01 2019 18:43:28 GMT-0800 (Pacific Standard Time)
+[debug] [2019-12-02T02:43:28.892Z] ----------------------------------------------------------------------
+[debug] [2019-12-02T02:43:28.892Z] 
+[debug] [2019-12-02T02:43:28.908Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-12-02T02:43:28.909Z] > authorizing via signed-in user
+[debug] [2019-12-02T02:43:28.909Z] [iam] checking project tutorme-5b529 for permissions ["firebase.projects.get"]
+[debug] [2019-12-02T02:43:28.911Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/tutorme-5b529:testIamPermissions  
+
+[debug] [2019-12-02T02:43:29.046Z] <<< HTTP RESPONSE 200
+[debug] [2019-12-02T02:43:29.048Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/tutorme-5b529  
+ 
+[debug] [2019-12-02T02:43:29.170Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Users\chase\Documents\GitHub\TuTme'...
+[info] 
+[debug] [2019-12-02T02:43:29.173Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/tutorme-5b529/webApps/-/config  
+ 
+[debug] [2019-12-02T02:43:30.263Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] +  hosting: Local server: http://localhost:5000

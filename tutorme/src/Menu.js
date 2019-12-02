@@ -6,9 +6,6 @@ import {GoogleLogin} from "react-google-login";
 
 
 
-
-
-
 class Menu extends Component{
   constructor(props){
     super(props);
@@ -16,22 +13,19 @@ class Menu extends Component{
     // this.signup = this.signup.bind(this);
     this.signin = this.signin.bind(this);
     this.signed = this.signed.bind(this);
-    this.handleSign = this.handleSign.bind(this);
     this.createSign = this.createSign.bind(this);
-
   }
-
   state ={
     redirectToReferrer: false,
-    signInState : this.props.App.isLoggedIn,
+    signInState : false,
     modalstatus: false,
   }
 
-  
+
+
   signin(){
     var userEmail = document.getElementById("email").value;
     var userPassword = document.getElementById("password").value;
-    // window.alert(userEmail +' ' + userPassword);
 
     firebase.auth().signInWithEmailAndPassword(userEmail, userPassword).catch(function(error) {
       // Handle Errors here.
@@ -60,33 +54,75 @@ class Menu extends Component{
     // }
 
     toggleModal(){
-      window.alert("state is " + this.props.App.isLoggedIn);
-      window.alert("state is " + this.state.signInState);
-      if(this.signInState == false){
         this.setState({
           modalstatus: !this.state.modalstatus
         });
-      }
-      else{
-       this.props.loginState(false);
-      }
     }
 
     createSign(){
-      if(this.signInState == false){
+      if(this.state.signInState == false){
         return(
           <li className={"nav-item"} id="signIn">
-            <a className={"nav-link"} href="#" onClick={this.toggleModal.bind(this)}>{this.props.App.isLoggedIn ? 'Sign Out':'Sign In'}<span class="sr-only">(current)</span></a>
+            <a className={"nav-link"} href="#" onClick={this.toggleModal.bind(this)}>Sign In<span class="sr-only">(current)</span></a>
           </li>
         );
       }
       else{
         return(
           <li class="nav-item" id="signIn">
-            <a className={"nav-link"} href="#" onClick={this.toggleModal.bind(this)}>{this.props.App.isLoggedIn ? 'Sign Out':'Sign In'}<span class="sr-only">(current)</span></a>
+            <a className={"nav-link"} href="#" onClick={this.toggleModal.bind(this)}>Sign Out<span class="sr-only">(current)</span></a>
           </li>
         );
       }
+    }
+
+    signed(){
+      var handle = this.handleSign();
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          var displayName = user.displayName;
+          var email = user.email;
+          var emailVerified = user.emailVerified;
+          var photoURL = user.photoURL;
+          var isAnonymous = user.isAnonymous;
+          var uid = user.uid;
+          var providerData = user.providerData;
+          window.alert(displayName);
+          // ...
+        } else {
+          // User is signed out.
+          // ...
+        }
+      });
+
+    // if (user) {
+    //     // User is signed in.
+    //  var sign_ = true;
+    //   window.alert("worked");
+    //  //  window.alert();
+    //  this.handleSign(sign_);
+      
+    // } else {
+    //     // No user is signed in.
+    //    var sign_ = false;
+    //   }
+ 
+      //  window.alert("firebase signed " + sign_);
+      //  if(sign_ == true){
+      //   window.alert("in sign");
+      //   this.toggleModal();
+      //   this.setState({
+      //       signInState: sign_,
+      //   });
+      //  }
+    }
+
+    handleSign(value){
+      this.toggleModal();
+      this.setState({
+          signInState: value,
+      });
     }
     render(){
       // const isLoggedIn = isLoggedIn;
@@ -149,33 +185,6 @@ class Menu extends Component{
         </container>
       );
     }
-
-    signed(){
-     var signn = this.signInState; 
-      firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-          // User is signed in.
-        signn = true;
-        window.alert("worked");
-        } else {
-          // No user is signed in.
-          signn = false;
-        }
-      });
-      this.signInState = signn;
-      window.alert("firebase signed " + this.signInState);
-      this.handleSign(this.signInState);
-    }
-    // handle signed in state
-    handleSign(value){
-        this.props.loginState(value);
-        this.setState({
-          sign: value
-        });
-        this.toggleModal();
-        window.alert('handle sign ' + this.props.App.isLoggedIn);
-    }
-
   }
 
   export default Menu;
