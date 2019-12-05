@@ -14,7 +14,6 @@ class Menu extends Component{
     this.signOut = this.signOut.bind(this);
   }
   state ={
-    redirectToReferrer: false,
     signInState : false,
     modalstatus: false,
     userName: null,
