@@ -12,7 +12,7 @@ import AboutUs from './AboutUs';
 import BeTutor from './BeTutor';
 import Tutorlist from './Tutorlist';
 import FAQs from './FAQs';
-import Signup from "./signup";
+import Signup from "./Signup";
 
 
 
@@ -49,12 +49,12 @@ class App extends React.Component {
     this.loginState = this.loginState.bind(this);
   }
   state = {
-    isLoggedIn : false,
+    signInState : false,
   }
 
   loginState(value){
     this.setState({
-      isLoggedIn: value,
+      signInState: value,
     });
   }
 
