@@ -88,7 +88,7 @@ class Menu extends Component{
           var isAnonymous = user.isAnonymous;
           var uid = user.uid;
           var providerData = user.providerData;
-          window.alert(displayName);
+          //window.alert(displayName);
           // ...
         } else {
           // User is signed out.
