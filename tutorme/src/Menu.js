@@ -26,23 +26,23 @@ class Menu extends Component{
   }
 
   signin(){
-    var userEmail = document.getElementById("email").value;
-    var userPassword = document.getElementById("password").value;
+    let userEmail = document.getElementById("email").value;
+    let userPassword = document.getElementById("password").value;
 
     firebase.auth().signInWithEmailAndPassword(userEmail, userPassword).catch(function(error) {
       // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
+      let errorCode = error.code;
+      let errorMessage = error.message;
       window.alert("Error " + errorMessage);
       // ...
     });
-   var user = firebase.auth().onAuthStateChanged(function(user) {
+   let user = firebase.auth().onAuthStateChanged(function(user) {
       return user;
     });
     if(user){
-         // User is signed in.    
+      // User is signed in.    
       this.toggleModal();
-      var u = firebase.auth().currentUser;
+      let u = firebase.auth().currentUser;
       if (u != null) {
         this.setState({
           signInState:true,
@@ -56,9 +56,12 @@ class Menu extends Component{
         })
       }
       else{
-        window.alert("not logged in");
+        console.log("did not get user info");
       }
 
+    }
+    else{
+      console.log("not logged in");
     }
   }
 
