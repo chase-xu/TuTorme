@@ -41,6 +41,9 @@ require("firebase/firestore");
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
+  var user = firebase.auth().onAuthStateChanged(function(user) {
+    return user;
+  });
 
 /*main section of the entire body*/
 class App extends React.Component {
@@ -113,4 +116,4 @@ class App extends React.Component {
 // }
 
 export default App;
-export {firebase,};
+export {firebase, user};

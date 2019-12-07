@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import {Container, Button, Alert, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import {firebase, } from './App.js';
+import {firebase, user } from './App.js';
 import {GoogleLogin} from "react-google-login";
 
 
@@ -12,6 +12,7 @@ class Menu extends Component{
     this.signin = this.signin.bind(this);
     this.createSign = this.createSign.bind(this);
     this.signOut = this.signOut.bind(this);
+    // this.getAuthStatus= this.getAuthStatus.bind(this);
   }
   state ={
     signInState : false,
@@ -25,6 +26,34 @@ class Menu extends Component{
     userproviderData: null, 
   }
 
+  // // On component load.
+  // componentDidMount(){
+  //   this.getAuthStatus();
+  // }
+  // // Get firebase auth status.
+  // getAuthStatus(){
+  //   firebase.auth().onAuthStateChanged(function(user) {
+  //       // Pass response to a call back func to update state
+  //       let u;
+  //       if(user){
+  //         u = true;
+  //       }
+  //       else{
+  //         u = false;
+  //       }
+  //       this.updateUserState(u);
+  //   });
+  // }
+
+  // // update state
+  // updateUserState = (resp) => {
+  //    this.setState({
+  //        signInState: resp
+  //    })
+  // }
+
+
+
   signin(){
     let userEmail = document.getElementById("email").value;
     let userPassword = document.getElementById("password").value;
@@ -36,9 +65,7 @@ class Menu extends Component{
       window.alert("Error " + errorMessage);
       // ...
     });
-   let user = firebase.auth().onAuthStateChanged(function(user) {
-      return user;
-    });
+
     if(user){
       // User is signed in.    
       this.toggleModal();
@@ -58,7 +85,6 @@ class Menu extends Component{
       else{
         console.log("did not get user info");
       }
-
     }
     else{
       console.log("not logged in");
@@ -96,10 +122,13 @@ class Menu extends Component{
     }
 
     signOut(){
-      firebase.auth().signOut();
+      firebase.auth().signOut().then(function() {
+        console.log('Signed Out');
+      }, function(error) {
+        console.error('Sign Out Error', error);
+      });
       this.setState({
         signInState : false,
-        modalstatus: false,
         userName: null,
         userEmail: null,
         useremailVerified: null,
@@ -117,7 +146,7 @@ class Menu extends Component{
       }
       
       return(
-        <container class="collapse navbar-collapse" id="navbarSupportedContent">
+        <Container class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
               <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
@@ -167,7 +196,7 @@ class Menu extends Component{
               </form>
             </ModalBody>
           </Modal>
-        </container>
+        </Container>
       );
     }
   }
