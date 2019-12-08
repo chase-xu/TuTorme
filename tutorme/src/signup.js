@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { Col, Row, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
-class SignUp extends React.Component{
+class Signup extends React.Component{
     render(){
         return(
             <Form>
@@ -59,4 +59,4 @@ class SignUp extends React.Component{
     }
 }
 
-export default SignUp;
+export default Signup;
