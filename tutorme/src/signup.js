@@ -1,38 +1,62 @@
 import React from 'react';
 import './App.css';
-import {firebase} from './App.js';
-import './Menu.js';
+import { Col, Row, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
-
-class Signup extends React.Component{
+class SignUp extends React.Component{
     render(){
         return(
-            <div class="bg-light mt-3 mr-4 ml-4">
-                <form class="p-2">
-                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"></input>
-                    </div>
-                    <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1"></input>
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    
-                </form>
-
-            </div>
+            <Form>
+                <Row form>
+                    <Col md={6}>
+                    <FormGroup>
+                        <Label for="exampleEmail">Email</Label>
+                        <Input type="email" name="email" id="exampleEmail" placeholder="with a placeholder" />
+                    </FormGroup>
+                    </Col>
+                    <Col md={6}>
+                    <FormGroup>
+                        <Label for="examplePassword">Password</Label>
+                        <Input type="password" name="password" id="examplePassword" placeholder="password placeholder" />
+                    </FormGroup>
+                    </Col>
+                </Row>
+                <FormGroup>
+                    <Label for="exampleAddress">Address</Label>
+                    <Input type="text" name="address" id="exampleAddress" placeholder="1234 Main St"/>
+                </FormGroup>
+                <FormGroup>
+                    <Label for="exampleAddress2">Address 2</Label>
+                    <Input type="text" name="address2" id="exampleAddress2" placeholder="Apartment, studio, or floor"/>
+                </FormGroup>
+                <Row form>
+                    <Col md={6}>
+                    <FormGroup>
+                        <Label for="exampleCity">City</Label>
+                        <Input type="text" name="city" id="exampleCity"/>
+                    </FormGroup>
+                    </Col>
+                    <Col md={4}>
+                    <FormGroup>
+                        <Label for="exampleState">State</Label>
+                        <Input type="text" name="state" id="exampleState"/>
+                    </FormGroup>
+                    </Col>
+                    <Col md={2}>
+                    <FormGroup>
+                        <Label for="exampleZip">Zip</Label>
+                        <Input type="text" name="zip" id="exampleZip"/>
+                    </FormGroup>  
+                    </Col>
+                </Row>
+                <FormGroup check>
+                    <Input type="checkbox" name="check" id="exampleCheck"/>
+                    <Label for="exampleCheck" check>Check me out</Label>
+                </FormGroup>
+                <Button>Sign in</Button>
+            </Form>
+            
         );
     }
-
-
 }
 
-
-export default Signup;
+export default SignUp;
