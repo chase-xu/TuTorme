@@ -12,7 +12,7 @@ import AboutUs from './AboutUs';
 import BeTutor from './BeTutor';
 import Tutorlist from './Tutorlist';
 import FAQs from './FAQs';
-import Signup from "./Signup";
+import Signup from "./signup";
 
 
 
