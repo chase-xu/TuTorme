@@ -8,11 +8,13 @@
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-modal": "^3.10.1",
+    "react-redux-firebase": "^3.0.5",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "react-tabs": "^3.0.0",
     "reactstrap": "^8.0.1",
     "redux": "^4.0.4",
+    "redux-firestore": "^0.11.0",
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
