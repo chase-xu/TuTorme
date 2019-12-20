@@ -7,64 +7,31 @@ import {connect } from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
 import {signIn} from './actions/authActions'
-import SignIn from './SignIn'
 
 class Menu extends Component{
   constructor(props){
     super(props);
     this.signin = this.signin.bind(this);
     this.createSign = this.createSign.bind(this);
-    this.signOut = this.signOut.bind(this);
+    // this.signOut = this.signOut.bind(this);
     // this.getAuthStatus= this.getAuthStatus.bind(this);
   }
   state ={
-    signInState : false,
     modalstatus: false,
     userName: null,
     userEmail: null,
-    useremailVerified: null,
-    userphotoURL: null,
-    userisAnonymous: null,
-    userId: null,
-    userproviderData: null, 
+    userPassword: null,
   }
 
 
-  signin(){
-    let userEmail = document.getElementById("email").value;
-    let userPassword = document.getElementById("password").value;
-
-    firebase.auth().signInWithEmailAndPassword(userEmail, userPassword).catch(function(error) {
-      // Handle Errors here.
-      let errorCode = error.code;
-      let errorMessage = error.message;
-      window.alert("Error " + errorMessage);
-      // ...
+  signin(e){
+    e.preventDefault();
+    this.setState({
+      ...this.state,
+      userEmail: document.getElementById("email").value,
+      userPassword: document.getElementById("password").value
     });
-
-    if(user){
-      // User is signed in.    
-      this.toggleModal();
-      let u = firebase.auth().currentUser;
-      if (u != null) {
-        this.setState({
-          signInState:true,
-          userName: u.displayName,
-          userEmail: u.email,
-          useremailVerified: u.emailVerified,
-          userphotoURL: u.photoURL,
-          userisAnonymous: u.isAnonymous,
-          userId: u.uid,
-          userproviderData: u.providerData,         
-        })
-      }
-      else{
-        console.log("did not get user info");
-      }
-    }
-    else{
-      console.log("not logged in");
-    }
+    this.props.signIn(this.state);
   }
 
     toggleModal(){
@@ -73,53 +40,55 @@ class Menu extends Component{
         });
     }
 
-    // createSign(){
-    //   if(this.state.signInState == false){
-    //     return(
-    //       <ul class="nav justify-content-end">
-    //         <li className={"nav-item "} id="signIn">
-    //           <a className={"nav-link"} href="#" onClick={this.toggleModal.bind(this)}>Hello, Sign In Here!<span class="sr-only">(current)</span></a>
-    //         </li>
-    //       </ul>
-    //     );
-    //   }
-    //   else{
-    //     return(
-    //       <ul class="nav justify-content-end">
-    //         <li class="nav-item">
-    //           <a className={"nav-link"}>Welcome Back, {this.state.userEmail}</a>
-    //         </li>
-    //         <li class="nav-item" id="signIn">
-    //           <a className={"nav-link"} href="#" onClick={this.signOut}>Sign Out<span class="sr-only">(current)</span></a>
-    //         </li>
-    //       </ul>
-    //     );
-    //   }
-    // }
-
-    signOut(){
-      firebase.auth().signOut().then(function() {
-        console.log('Signed Out');
-      }, function(error) {
-        console.error('Sign Out Error', error);
-      });
-      this.setState({
-        signInState : false,
-        userName: null,
-        userEmail: null,
-        useremailVerified: null,
-        userphotoURL: null,
-        userisAnonymous: null,
-        userId: null,
-        userproviderData: null, 
-      })
+    createSign(){
+      const {authError} = this.props;
+      if(authError != null){
+        return(
+          <ul class="nav justify-content-end">
+            <li className={"nav-item "} id="signIn">
+              <a className={"nav-link"} href="#" onClick={this.toggleModal.bind(this)}>Hello, Sign In Here!<span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+        );
+      }
+      else{
+        return(
+          <ul class="nav justify-content-end">
+            <li class="nav-item">
+              <a className={"nav-link"}>Welcome Back, {this.state.userEmail}</a>
+            </li>
+            <li class="nav-item" id="signIn">
+              <a className={"nav-link"} href="#" onClick={this.signOut}>Sign Out<span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+        );
+      }
     }
+
+    // signOut(){
+    //   firebase.auth().signOut().then(function() {
+    //     console.log('Signed Out');
+    //   }, function(error) {
+    //     console.error('Sign Out Error', error);
+    //   });
+    //   this.setState({
+    //     signInState : false,
+    //     userName: null,
+    //     userEmail: null,
+    //     useremailVerified: null,
+    //     userphotoURL: null,
+    //     userisAnonymous: null,
+    //     userId: null,
+    //     userproviderData: null, 
+    //   })
+    // }
     render(){
       // const isLoggedIn = isLoggedIn;
       const responseGoogle = (response) =>{
         console.log(response);
         this.signup(response, 'google');
       }
+
       
       return(
         <Container class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -140,8 +109,7 @@ class Menu extends Component{
               <a class="nav-link" href="/Signup" hidden>Sign Up<span class="sr-only">(current)</span></a>
             </li>
           </ul>
-          <SignIn />
-          {/* {this.createSign()} */}
+          {this.createSign()}
           {/* modal implementation!!!! */}
           <Modal isOpen={this.state.modalstatus} className={"modal-dialog-centered"} toggle={this.toggleModal.bind(this)}>
             <ModalHeader toggle={this.toggleModal.bind(this)}>Sign In To Your Account</ModalHeader>
