@@ -186,7 +186,7 @@ class Menu extends Component{
   }
   const mapDispatchToProps = (dispatch) =>{
     return{
-      signIn: (creds) => dispatch(signIn(creds));
+      signIn: (creds) => dispatch(signIn(creds))
     }
   }
   export default connect(mapStateToProps, mapDispatchToProps)(Menu);
