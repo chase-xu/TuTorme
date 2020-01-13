@@ -12,7 +12,7 @@ import {signIn} from './actions/authActions'
 class Menu extends Component{
   constructor(props){
     super(props);
-    this.signin = this.signin.bind(this);
+    // this.signin = this.signin.bind(this);
     this.createSign = this.createSign.bind(this);
     // this.signOut = this.signOut.bind(this);
     // this.getAuthStatus= this.getAuthStatus.bind(this);
@@ -22,17 +22,18 @@ class Menu extends Component{
     userName: null,
     userEmail: null,
     userPassword: null,
+    firebase: null,
   }
 
 
-  signin(e){
-    e.preventDefault();
+  handleChange=(e)=>{
+    
     this.setState({
       ...this.state,
-      userEmail: document.getElementById("email").value,
-      userPassword: document.getElementById("password").value
+      [e.target.id]: e.target.value
     });
-    this.props.signIn(this.state);
+    console.log(this.state.userEmail);
+    console.log(this.state.userPassword);
   }
 
     toggleModal(){
@@ -40,6 +41,19 @@ class Menu extends Component{
           modalstatus: !this.state.modalstatus
         });
     }
+
+  handleSubmit=(e)=>{
+    e.preventDefault();
+    console.log("submitted");
+    console.log(this.state.userEmail);
+    this.props.signIn(this.state);
+    this.toggleModal();
+    // const {firebase} = this.props;
+    // this.setState({
+    //   ...this.state,
+    //   firebase: firebase,
+    // })
+  }
 
     createSign(authError){
       if(authError == null && authError != 'Login failed'){
@@ -55,7 +69,7 @@ class Menu extends Component{
         return(
           <ul class="nav justify-content-end">
             <li class="nav-item">
-              <a className={"nav-link"}>Welcome Back, {this.state.userEmail}</a>
+              <a className={"nav-link"}>Welcome Back, {this.state.firebase.auth.currentUser.user.email}</a>
             </li>
             <li class="nav-item" id="signIn">
               <a className={"nav-link"} href="#" onClick={this.signOut}>Sign Out<span class="sr-only">(current)</span></a>
@@ -68,12 +82,12 @@ class Menu extends Component{
   
     render(){
       // const isLoggedIn = isLoggedIn;
-      const responseGoogle = (response) =>{
-        console.log(response);
-        this.signup(response, 'google');
-      }
+      // const responseGoogle = (response) =>{
+      //   console.log(response);
+      //   this.signup(response, 'google');
+      // }
       const {authError} = this.props;
-
+      
       
       return(
         <Container class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -99,25 +113,25 @@ class Menu extends Component{
           <Modal isOpen={this.state.modalstatus} className={"modal-dialog-centered"} toggle={this.toggleModal.bind(this)}>
             <ModalHeader toggle={this.toggleModal.bind(this)}>Sign In To Your Account</ModalHeader>
             <ModalBody>
-              <GoogleLogin
+              {/* <GoogleLogin
               clientId="868983935360-nea6nb8fsc8av1624umq3fepj0ffgihu.apps.googleusercontent.com"
               buttonText="Login"
               onSuccess={responseGoogle}
               onFailure={responseGoogle}
-              />
-              <form>
+              /> */}
+              <form onSubmit={this.handleSubmit}>
                 {/* <GoogleLoginButton onClick={() =>function(){}, log()} /> */}
                 <div className={"form-group"}>
                   <lable>Email address</lable>
-                  <input type="email" class="form-control" aria-describedly="emailHelp" placeholder="Enter email" id="email"></input>
+                  <input type="email" class="form-control" aria-describedly="emailHelp" placeholder="Enter email" id="userEmail" onChange={this.handleChange.bind(this)}></input>
                   <small class="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
                 <div className={"form-group"}>
                   <label for="exampleInputPassword1">Password</label>
-                  <input type="password" class="form-control" placeholder="Password" id="password"></input>
+                  <input type="password" class="form-control" placeholder="Password" id="userPassword" onChange={this.handleChange.bind(this)}></input>
                 </div>
                 <div className={"row justify-content-center"}>
-                  <button className={"btn btn-success col-4 align-self-center"} onClick={this.signin}>Sign In</button>
+                  <button className={"btn btn-success col-4 align-self-center"} >Sign In</button>
                 </div>   
                 <div class="d-flex mt-2">
                   <a href="#" class="link p-2 bd-highlight">Don't have an account?</a>

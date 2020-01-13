@@ -1,5 +1,6 @@
 const initState = {
     authError: null,
+    firebase: null,
 }
 const authReducer = (state = initState, action) => {
     switch(action.type){
@@ -13,6 +14,7 @@ const authReducer = (state = initState, action) => {
             return{
                 ...state,
                 authError: null,
+                firebase: action.firebase,
             }
         default:
             return state;
