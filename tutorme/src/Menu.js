@@ -7,6 +7,7 @@ import {connect } from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
 import {signIn} from './actions/authActions'
+import {signOut} from './actions/authActions'
 // import {authError} from './reducers/authReducer'
 
 class Menu extends Component{
@@ -55,8 +56,9 @@ class Menu extends Component{
     // })
   }
 
-    createSign(authError){
-      if(authError == null && authError != 'Login failed'){
+    createSign(auth){
+      const id = auth.uid
+      if(!id){
         return(
           <ul class="nav justify-content-end">
             <li className={"nav-item "} id="signIn">
@@ -69,7 +71,7 @@ class Menu extends Component{
         return(
           <ul class="nav justify-content-end">
             <li class="nav-item">
-              <a className={"nav-link"}>Welcome Back, {this.state.firebase.auth.currentUser.user.email}</a>
+        <a className={"nav-link"}>Welcome Back, {id}</a>
             </li>
             <li class="nav-item" id="signIn">
               <a className={"nav-link"} href="#" onClick={this.signOut}>Sign Out<span class="sr-only">(current)</span></a>
@@ -87,7 +89,7 @@ class Menu extends Component{
       //   this.signup(response, 'google');
       // }
       const {authError} = this.props;
-      
+      const {auth} = this.props;
       
       return(
         <Container class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -108,7 +110,7 @@ class Menu extends Component{
               <a class="nav-link" href="/Signup" hidden>Sign Up<span class="sr-only">(current)</span></a>
             </li>
           </ul>
-          {this.createSign(authError)}
+          {this.createSign(auth)}
           {/* modal implementation!!!! */}
           <Modal isOpen={this.state.modalstatus} className={"modal-dialog-centered"} toggle={this.toggleModal.bind(this)}>
             <ModalHeader toggle={this.toggleModal.bind(this)}>Sign In To Your Account</ModalHeader>
@@ -148,7 +150,8 @@ class Menu extends Component{
   const mapStateToProps = (state) =>{
     console.log(state);
     return{
-      authError: state.auth.authError
+      authError: state.auth.authError,
+      auth: state.firebase.auth,
     }
   }
   const mapDispatchToProps = (dispatch) =>{

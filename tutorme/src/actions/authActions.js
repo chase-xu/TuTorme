@@ -14,3 +14,13 @@ export const signIn = (Credentials) =>{
         });
     }
 }
+
+
+export const signOut =()=>{
+    return(dispatch, getState, {getFirebase}) => {
+        const firebase = getFirebase();
+        firebase.auth().signOut().then(() => {
+            dispatch({type: 'SGINOUT_SUCCESS'});
+        })
+    }
+}
