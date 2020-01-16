@@ -12,7 +12,7 @@ import AboutUs from './AboutUs';
 import BeTutor from './BeTutor';
 import Tutorlist from './Tutorlist';
 import FAQs from './FAQs';
-import Signup from "./signup";
+import Signup from "./Signup";
 
 
 
@@ -21,29 +21,29 @@ import Signup from "./signup";
 
 // Firebase App (the core Firebase SDK) is always required and
 // must be listed before other Firebase SDKs
-var firebase = require("firebase/app");
+// var firebase = require("firebase/app");
 
-// Add the Firebase products that you want to use
-require("firebase/auth");
-require("firebase/firestore");
+// // Add the Firebase products that you want to use
+// require("firebase/auth");
+// require("firebase/firestore");
 
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyA-IMqgMCzH-13HIzHFZtZtHQH_VNt68V0",
-    authDomain: "tutorme-5b529.firebaseapp.com",
-    databaseURL: "https://tutorme-5b529.firebaseio.com",
-    projectId: "tutorme-5b529",
-    storageBucket: "tutorme-5b529.appspot.com",
-    messagingSenderId: "868983935360",
-    appId: "1:868983935360:web:2e389cac6bb76b347b3165",
-    measurementId: "G-NTL9GBD7HB"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+//   // Your web app's Firebase configuration
+//   var firebaseConfig = {
+//     apiKey: "AIzaSyA-IMqgMCzH-13HIzHFZtZtHQH_VNt68V0",
+//     authDomain: "tutorme-5b529.firebaseapp.com",
+//     databaseURL: "https://tutorme-5b529.firebaseio.com",
+//     projectId: "tutorme-5b529",
+//     storageBucket: "tutorme-5b529.appspot.com",
+//     messagingSenderId: "868983935360",
+//     appId: "1:868983935360:web:2e389cac6bb76b347b3165",
+//     measurementId: "G-NTL9GBD7HB"
+//   };
+//   // Initialize Firebase
+//   firebase.initializeApp(firebaseConfig);
 
-  var user = firebase.auth().onAuthStateChanged(function(user) {
-    return user;
-  });
+//   var user = firebase.auth().onAuthStateChanged(function(user) {
+//     return user;
+//   });
 
 /*main section of the entire body*/
 class App extends React.Component {
@@ -116,4 +116,4 @@ class App extends React.Component {
 // }
 
 export default App;
-export {firebase, user};
+// export {firebase, user};
