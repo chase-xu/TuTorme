@@ -49,15 +49,10 @@ class Menu extends Component{
     console.log(this.state.userEmail);
     this.props.signIn(this.state);
     this.toggleModal();
-    // const {firebase} = this.props;
-    // this.setState({
-    //   ...this.state,
-    //   firebase: firebase,
-    // })
   }
 
     createSign(auth){
-      const id = auth.uid
+      const id = auth.email;
       if(!id){
         return(
           <ul class="nav justify-content-end">
@@ -74,7 +69,7 @@ class Menu extends Component{
         <a className={"nav-link"}>Welcome Back, {id}</a>
             </li>
             <li class="nav-item" id="signIn">
-              <a className={"nav-link"} href="#" onClick={this.signOut}>Sign Out<span class="sr-only">(current)</span></a>
+              <a className={"nav-link"} href="#" onClick={this.props.signOut}>Sign Out<span class="sr-only">(current)</span></a>
             </li>
           </ul>
         );
@@ -156,7 +151,8 @@ class Menu extends Component{
   }
   const mapDispatchToProps = (dispatch) =>{
     return{
-      signIn: (creds) => dispatch(signIn(creds))
+      signIn: (creds) => dispatch(signIn(creds)),
+      signOut: () => dispatch(signOut())
     }
   }
   export default connect(mapStateToProps, mapDispatchToProps)(Menu);
