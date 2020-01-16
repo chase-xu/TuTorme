@@ -22,7 +22,7 @@ const store = createStore(rootReducer,
         applyMiddleware(thunk.withExtraArgument({getFirebase, 
             getFirestore})),
         reduxFirestore(firebase, fbConfig),
-        // reactReduxFirebase(fbConfig),
+        // reactReduxFirebase(fbConfig, {attachAuthIsReady:true,}),
     ) 
 );
 

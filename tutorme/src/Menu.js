@@ -9,12 +9,17 @@ import {compose} from 'redux'
 import {signIn} from './actions/authActions'
 import {signOut} from './actions/authActions'
 // import {authError} from './reducers/authReducer'
+import {useSelector} from 'react-redux'
+import {isLoaded} from 'react-redux-firebase'
+
 
 class Menu extends Component{
   constructor(props){
     super(props);
     // this.signin = this.signin.bind(this);
-    this.createSign = this.createSign.bind(this);
+    // this.Signed = this.Signed.bind(this);
+    // this.notSigned = this.notSigned.bind(this);
+    this.signed = this.signed.bind(this);
     // this.signOut = this.signOut.bind(this);
     // this.getAuthStatus= this.getAuthStatus.bind(this);
   }
@@ -51,8 +56,36 @@ class Menu extends Component{
     this.toggleModal();
   }
 
-    createSign(auth){
+    // Signed(auth){
+    //   const id = auth.email;
+    //   console.log(id)
+    //   if(!id){
+    //     return(
+    //       <ul class="nav justify-content-end">
+    //         <li className={"nav-item "} id="signIn">
+    //           <a className={"nav-link"} href="#" onClick={this.toggleModal.bind(this)}>Hello, Sign In Here!<span class="sr-only">(current)</span></a>
+    //         </li>
+    //       </ul>
+    //     );
+    //   }
+    // }
+
+    // notSigned(auth){
+    //   const id = auth.email;
+    //   return(
+    //     <ul class="nav justify-content-end">
+    //       <li class="nav-item">
+    //   <a className={"nav-link"}>Welcome Back, {id}</a>
+    //       </li>
+    //       <li class="nav-item" id="signIn">
+    //         <a className={"nav-link"} href="#" onClick={this.props.signOut}>Sign Out<span class="sr-only">(current)</span></a>
+    //       </li>
+    //     </ul>
+    //   );
+    // }
+    signed(auth){
       const id = auth.email;
+      console.log(id)
       if(!id){
         return(
           <ul class="nav justify-content-end">
@@ -61,8 +94,7 @@ class Menu extends Component{
             </li>
           </ul>
         );
-      }
-      else{
+      }else{
         return(
           <ul class="nav justify-content-end">
             <li class="nav-item">
@@ -85,7 +117,7 @@ class Menu extends Component{
       // }
       const {authError} = this.props;
       const {auth} = this.props;
-      
+
       return(
         <Container class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
@@ -105,7 +137,8 @@ class Menu extends Component{
               <a class="nav-link" href="/Signup" hidden>Sign Up<span class="sr-only">(current)</span></a>
             </li>
           </ul>
-          {this.createSign(auth)}
+          {/* {isLoaded(auth) ? this.notSigned(auth) : this.Signed(auth)} */}
+          {this.signed(auth)}
           {/* modal implementation!!!! */}
           <Modal isOpen={this.state.modalstatus} className={"modal-dialog-centered"} toggle={this.toggleModal.bind(this)}>
             <ModalHeader toggle={this.toggleModal.bind(this)}>Sign In To Your Account</ModalHeader>
