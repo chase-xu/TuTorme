@@ -11,7 +11,7 @@ import {signOut} from './actions/authActions'
 // import {authError} from './reducers/authReducer'
 import {useSelector} from 'react-redux'
 import {isLoaded} from 'react-redux-firebase'
-
+import {Redirect} from 'react-router-dom'
 
 class Menu extends Component{
   constructor(props){
@@ -20,6 +20,7 @@ class Menu extends Component{
     // this.Signed = this.Signed.bind(this);
     // this.notSigned = this.notSigned.bind(this);
     this.signed = this.signed.bind(this);
+    this.signUp = this.signUp.bind(this);
     // this.signOut = this.signOut.bind(this);
     // this.getAuthStatus= this.getAuthStatus.bind(this);
   }
@@ -108,6 +109,10 @@ class Menu extends Component{
       }
     }
 
+    signUp(){
+      
+    }
+
   
     render(){
       // const isLoggedIn = isLoggedIn;
@@ -134,7 +139,7 @@ class Menu extends Component{
               <a class="nav-link" href="/BeTutor">BeTutor<span class="sr-only">(current)</span></a>
             </li>
             <li class ="nav-item">
-              <a class="nav-link" href="/Signup" hidden>Sign Up<span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/Signup" >Sign Up<span class="sr-only">(current)</span></a>
             </li>
           </ul>
           {/* {isLoaded(auth) ? this.notSigned(auth) : this.Signed(auth)} */}
@@ -164,7 +169,7 @@ class Menu extends Component{
                   <button className={"btn btn-success col-4 align-self-center"} >Sign In</button>
                 </div>   
                 <div class="d-flex mt-2">
-                  <a href="#" class="link p-2 bd-highlight">Don't have an account?</a>
+                  <a href="/Signup" class="link p-2 bd-highlight">Don't have an account?</a>
                   <a href="#" class="link ml-auto p-2 bd-highlight">Forgot your password?</a>
                 </div>
               </form>
