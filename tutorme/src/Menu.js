@@ -20,7 +20,6 @@ class Menu extends Component{
     // this.Signed = this.Signed.bind(this);
     // this.notSigned = this.notSigned.bind(this);
     this.signed = this.signed.bind(this);
-    this.signUp = this.signUp.bind(this);
     // this.signOut = this.signOut.bind(this);
     // this.getAuthStatus= this.getAuthStatus.bind(this);
   }
@@ -107,10 +106,6 @@ class Menu extends Component{
           </ul>
         );
       }
-    }
-
-    signUp(){
-      
     }
 
   
