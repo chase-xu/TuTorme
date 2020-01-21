@@ -9,9 +9,6 @@ import {compose} from 'redux'
 import {signIn} from './actions/authActions'
 import {signOut} from './actions/authActions'
 // import {authError} from './reducers/authReducer'
-import {useSelector} from 'react-redux'
-import {isLoaded} from 'react-redux-firebase'
-import {Redirect} from 'react-router-dom'
 
 class Menu extends Component{
   constructor(props){

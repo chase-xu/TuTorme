@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
 import { Col, Row, Button, Form, FormGroup, Label, Input } from 'reactstrap';
-
+import {SignUp} from './actions/authActions';
+import {connect } from 'react-redux'
 class Signup extends React.Component{
     render(){
         return(
@@ -44,7 +45,7 @@ class Signup extends React.Component{
                         </Col>
                         <Col md={2}>
                         <FormGroup>
-                            <Label for="exampleZip">Zip</Label>
+                            <Label for="exampleZip">Post Code</Label>
                             <Input type="text" name="zip" id="exampleZip"/>
                         </FormGroup>  
                         </Col>
@@ -61,4 +62,18 @@ class Signup extends React.Component{
     }
 }
 
-export default Signup;
+
+const mapStateToProps = (state) =>{
+    console.log(state);
+    return{
+      authError: state.auth.authError,
+      auth: state.firebase.auth,
+    }
+  }
+  const mapDispatchToProps = (dispatch) =>{
+    return{
+    //   signIn: (creds) => dispatch(signIn(creds)),
+    //   signOut: () => dispatch(signOut())
+    }
+  }
+  export default connect(mapStateToProps, mapDispatchToProps)(Signup);
