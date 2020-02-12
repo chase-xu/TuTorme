@@ -9,9 +9,6 @@ import {compose} from 'redux'
 import {signIn} from './actions/authActions'
 import {signOut} from './actions/authActions'
 // import {authError} from './reducers/authReducer'
-import {useSelector} from 'react-redux'
-import {isLoaded} from 'react-redux-firebase'
-import {Redirect} from 'react-router-dom'
 
 class Menu extends Component{
   constructor(props){
@@ -20,7 +17,6 @@ class Menu extends Component{
     // this.Signed = this.Signed.bind(this);
     // this.notSigned = this.notSigned.bind(this);
     this.signed = this.signed.bind(this);
-    this.signUp = this.signUp.bind(this);
     // this.signOut = this.signOut.bind(this);
     // this.getAuthStatus= this.getAuthStatus.bind(this);
   }
@@ -107,10 +103,6 @@ class Menu extends Component{
           </ul>
         );
       }
-    }
-
-    signUp(){
-      
     }
 
   
